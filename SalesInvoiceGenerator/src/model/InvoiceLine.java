@@ -2,8 +2,8 @@ package model;
 
 public class InvoiceLine {
 	private String itemName;
-	private int itemPrice;
-	private int count;
+	private String itemPrice;
+	private String count;
 	
 	public String getItemName() {
 		return itemName;
@@ -11,16 +11,16 @@ public class InvoiceLine {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public int getItemPrice() {
+	public String getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(int itemPrice) {
+	public void setItemPrice(String itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public int getCount() {
+	public String getCount() {
 		return count;
 	}
-	public void setCount(int count) {
+	public void setCount(String count) {
 		this.count = count;
 	}
 	

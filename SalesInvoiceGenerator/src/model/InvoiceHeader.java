@@ -1,12 +1,12 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 public class InvoiceHeader {
 private int invoiceNumber;
-private String invoiceDate; // DD/MM/YYYY
+private String invoiceDate; // DD-MM-YYYY
 private String customerName;
-private ArrayList<InvoiceLine> InvoiceLinesList;
+private Vector<InvoiceLine> InvoiceLinesList;
 
 public int getInvoiceNumber() {
 	return invoiceNumber;
@@ -26,12 +26,21 @@ public String getCustomerName() {
 public void setCustomerName(String customerName) {
 	this.customerName = customerName;
 }
-public ArrayList<InvoiceLine> getInvoiceLinesList() {
+public Vector<InvoiceLine> getInvoiceLinesList() {
 	return InvoiceLinesList;
 }
-public void setInvoiceLinesList(ArrayList<InvoiceLine> invoiceLinesList) {
+public void setInvoiceLinesList(Vector<InvoiceLine> invoiceLinesList) {
 	InvoiceLinesList = invoiceLinesList;
 }
 
+public String computeCount() {
+	// compute total price for invoice from all items it have
+	// done this way to have flexibility adding removing items
+	int count =0;
+	for (int i=0;i<InvoiceLinesList.size();i++) {
+		count += Integer.parseInt(InvoiceLinesList.get(i).getCount()) *  Integer.parseInt(InvoiceLinesList.get(i).getItemPrice())  ;
+	}
+	return Integer.toString(count);
+}
 
 }
