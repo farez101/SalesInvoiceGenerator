@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 public class FileOperations {
 
 	private static JFileChooser fileChooser = new JFileChooser();
+	private static JFileChooser fileChooserItems = new JFileChooser();
 
 	public static ArrayList<InvoiceHeader> readFile(JFrame parent) throws FileNotFoundException {
 		HashMap<Integer, InvoiceHeader> invoicesMap = new HashMap<Integer, InvoiceHeader>();
@@ -29,14 +30,22 @@ public class FileOperations {
 			fileChooser.setDialogTitle("Load Invoices Table");
 			fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src"));
 			int result = fileChooser.showOpenDialog(parent);
+			fileChooserItems = new JFileChooser();
+			fileChooserItems.setDialogTitle("Load Invoices Items");
+			fileChooserItems.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src"));
+			int resultItems = fileChooserItems.showOpenDialog(parent);
 			if (result == JFileChooser.APPROVE_OPTION) {
 				// user selects a file
 				File selectedFile = fileChooser.getSelectedFile();
+				File selectedFileItems = fileChooserItems.getSelectedFile();
+
 //				System.out.println(	fileChooser.getCurrentDirectory());
 				BufferedReader br = new BufferedReader(new FileReader(selectedFile.getAbsolutePath()));
 				@SuppressWarnings("resource")
-				BufferedReader brItems = new BufferedReader(
-						new FileReader(fileChooser.getCurrentDirectory() + "/InvoiceLine.csv"));
+				BufferedReader brItems = new BufferedReader(new FileReader(selectedFileItems.getAbsolutePath()));
+
+//				BufferedReader brItems = new BufferedReader(
+//						new FileReader(fileChooser.getCurrentDirectory() + "/InvoiceLine.csv"));
 				// add invoices
 				while ((line = br.readLine()) != null) {
 					String[] invoice = line.split(splitBy); // use comma as separator
